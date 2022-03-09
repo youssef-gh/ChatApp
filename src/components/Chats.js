@@ -32,7 +32,7 @@ const Chats = () => {
         }
         axios.get('http://api.chatengine.io/users/me', {
             headers: {
-            "project-id" : "0510fb53-f545-4e4b-8c9b-79ae77a9a4d2",
+            "project-id" : process.env.REACT_APP_CHAT_ENGINE_ID,
             "user-name" : user.email,
             "user-secret" : user.uid,
             }
@@ -50,7 +50,7 @@ const Chats = () => {
                     formdata.append('avatar' , avatar , avatar.name);
                     axios.post('http://api.chatengine.io/users',
                     formdata,
-                    {headers : { "private-key": "9b07e87e-da90-4147-8298-1b17e6c6c49e"} }
+                    {headers : { "private-key": process.env.REACT_APP_CHAT_ENGINE_KEY} }
                     )
                     .then( () => setLoading(false))
                     .catch( (error) => console.log(error))
@@ -70,7 +70,7 @@ const Chats = () => {
             </div>
             <ChatEngine 
             height = "calc(100vh - 66px)"
-            projectID = "0510fb53-f545-4e4b-8c9b-79ae77a9a4d2" // before upload the file i should move it to ENV
+            projectID = {process.env.REACT_APP_CHAT_ENGINE_ID} // before upload the file i should move it to ENV
             userName = {user.email}
             userSecret = {user.uid}
             />
